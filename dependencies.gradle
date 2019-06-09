@@ -18,7 +18,7 @@ ext {
     timberVersion = '4.7.1'
     retrofitVersion = '2.5.0'
     archCoreTestingVersion = '2.0.0'
-
+    glideVersion = '4.9.0'
 
     buildPlugins = [
             androidGradlePlugin: "com.android.tools.build:gradle:$androidBuildToolsVersion",
@@ -37,7 +37,9 @@ ext {
             lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
             timber               : "com.jakewharton.timber:timber:$timberVersion",
             retrofitGSon         : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
-            retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion"
+            retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            glide                : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler        : "com.github.bumptech.glide:compiler:$glideVersion"
     ]
 
 

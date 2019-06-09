@@ -42,6 +42,9 @@ dependencies {
     implementation libraries.roomRuntime
     kapt libraries.roomCompiler
 
+    implementation libraries.glide
+    kapt libraries.glideCompiler
+
     testImplementation testLibraries.junit4
     androidTestImplementation testLibraries.testRunner
     androidTestImplementation testLibraries.espressoCore

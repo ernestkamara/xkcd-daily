@@ -2,12 +2,15 @@ package io.kamara.xkcd.daily
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.repository.ComicRepository
 import io.kamara.xkcd.daily.utils.Constants
@@ -54,6 +57,7 @@ class ComicDetailFragment : Fragment() {
 
     private fun updateViews(comic: Comic?) {
         comicText.text = comic?.toString()
+        comic?.img?.let { loadImage(it, comicImage) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,6 +65,14 @@ class ComicDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_comic_detail, container, false)
     }
 
+
+     private fun loadImage(imageUrl: String, view: ImageView) {
+        Glide.with(this)
+            .load(imageUrl)
+            .placeholder(R.drawable.load_image_placeholder)
+            .transition(DrawableTransitionOptions.withCrossFade(Constants.IMAGE_LOADING_CROSS_FADE_DURATION))
+            .into(view)
+    }
 
     companion object {
         /**
