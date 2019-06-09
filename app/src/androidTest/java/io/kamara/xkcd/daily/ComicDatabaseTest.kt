@@ -10,7 +10,7 @@ import androidx.test.runner.AndroidJUnit4
 import com.google.gson.Gson
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.data.ComicDao
-import io.kamara.xkcd.daily.db.ComicDatabase
+import io.kamara.xkcd.daily.repository.ComicDatabase
 import junit.framework.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
