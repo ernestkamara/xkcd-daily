@@ -1,0 +1,50 @@
+ext {
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+
+    androidBuildToolsVersion = '3.4.1'
+
+    kotlinVersion = '1.3.31'
+    jetpackVersion = '1.0.2'
+    ktxVersion = '1.0.2'
+    constraintLayoutVersion = '1.1.3'
+    materialDesignVersion = '1.0.0'
+    roomVerison = '2.0.0'
+    junit4Version = '4.12'
+    testRunnerVersion = '1.2.0'
+    espressoCoreVersion = '3.2.0'
+    lifecycleExtensionsVersion = '2.0.0'
+    timberVersion = '4.7.1'
+    retrofitVersion = '2.5.0'
+    archCoreTestingVersion = '2.0.0'
+
+
+    buildPlugins = [
+            androidGradlePlugin: "com.android.tools.build:gradle:$androidBuildToolsVersion",
+            kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    ]
+
+
+    libraries = [
+            kotlinStdLib         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat            : "androidx.appcompat:appcompat:$jetpackVersion",
+            constraintLayout     : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            ktxCore              : "androidx.core:core-ktx:$ktxVersion",
+            materialDesign       : "com.google.android.material:material:$materialDesignVersion",
+            roomRuntime          : "androidx.room:room-runtime:$roomVerison",
+            roomCompiler         : "androidx.room:room-compiler:$roomVerison",
+            lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
+            timber               : "com.jakewharton.timber:timber:$timberVersion",
+            retrofitGSon         : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    ]
+
+
+    testLibraries = [
+            junit4              : "junit:junit:$junit4Version",
+            testRunner          : "androidx.test:runner:$testRunnerVersion",
+            espressoCore        : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            archCoreTesting     : "androidx.arch.core:core-testing:$archCoreTestingVersion"
+    ]
+}
