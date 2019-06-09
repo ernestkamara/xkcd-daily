@@ -2,10 +2,9 @@ package io.kamara.xkcd.daily
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -62,10 +61,23 @@ class ComicDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_comic_detail, container, false)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.comic_detail_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_favorites -> {
+                Toast.makeText(requireContext(), "TBI", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
      private fun loadImage(imageUrl: String, view: ImageView) {
         Glide.with(this)
             .load(imageUrl)
