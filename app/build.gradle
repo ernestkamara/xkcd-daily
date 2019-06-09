@@ -45,6 +45,13 @@ dependencies {
     implementation libraries.glide
     kapt libraries.glideCompiler
 
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+
+    implementation libraries.daggerAndroid
+    implementation libraries.daggerAndroidSupport
+    kapt libraries.daggerAndroidCompiler
+
     testImplementation testLibraries.junit4
     androidTestImplementation testLibraries.testRunner
     androidTestImplementation testLibraries.espressoCore

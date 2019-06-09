@@ -19,6 +19,7 @@ ext {
     retrofitVersion = '2.5.0'
     archCoreTestingVersion = '2.0.0'
     glideVersion = '4.9.0'
+    daggerVerion = '2.23.1'
 
     buildPlugins = [
             androidGradlePlugin: "com.android.tools.build:gradle:$androidBuildToolsVersion",
@@ -39,7 +40,14 @@ ext {
             retrofitGSon         : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
             retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             glide                : "com.github.bumptech.glide:glide:$glideVersion",
-            glideCompiler        : "com.github.bumptech.glide:compiler:$glideVersion"
+            glideCompiler        : "com.github.bumptech.glide:compiler:$glideVersion",
+
+            dagger               : "com.google.dagger:dagger:$daggerVerion",
+            daggerCompiler       : "com.google.dagger:dagger-compiler:$daggerVerion",
+            daggerAndroid        : "com.google.dagger:dagger-android:$daggerVerion",
+            daggerAndroidSupport : "com.google.dagger:dagger-android-support:$daggerVerion",
+            daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:$daggerVerion"
+
     ]
 
 

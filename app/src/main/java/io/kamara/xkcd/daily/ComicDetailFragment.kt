@@ -8,25 +8,23 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.kamara.xkcd.daily.data.Comic
-import io.kamara.xkcd.daily.repository.ComicRepository
+import io.kamara.xkcd.daily.di.Injectable
 import io.kamara.xkcd.daily.utils.Constants
-import io.kamara.xkcd.daily.utils.InjectorUtils
 import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModel
-import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModelFactory
 import kotlinx.android.synthetic.main.fragment_comic_detail.*
+import javax.inject.Inject
 
 
 /**
  * A fragment representing a single [Comic] detail screen
  *
  */
-//TODO: Make injectable
-class ComicDetailFragment : Fragment() {
-    private lateinit var comicDetailViewModelFactory: ComicDetailViewModelFactory
-    private lateinit var comicRepository: ComicRepository
+class ComicDetailFragment : Fragment(), Injectable {
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private var comicDetailViewModel: ComicDetailViewModel? = null
     private var comicId: String? = "14" //TODO: Default to null
 
@@ -40,18 +38,12 @@ class ComicDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        comicRepository = InjectorUtils.getComicRepository(requireContext())
+        comicDetailViewModel = ViewModelProviders
+            .of(this, viewModelFactory)
+            .get(ComicDetailViewModel::class.java)
 
-
-        comicId?.let {comicId ->
-            comicDetailViewModelFactory = ComicDetailViewModelFactory(comicId, comicRepository)
-            comicDetailViewModel = ViewModelProvider(this, comicDetailViewModelFactory)
-                .get(ComicDetailViewModel::class.java)
-
-            comicDetailViewModel?.comic?.observe(viewLifecycleOwner, Observer { comic ->
-                updateViews(comic) }
-            )
-        }
+        comicId?.let { comicDetailViewModel?.setComicId(it) }
+        comicDetailViewModel?.comic?.observe(viewLifecycleOwner, Observer { comic -> updateViews(comic) })
     }
 
     private fun updateViews(comic: Comic?) {
