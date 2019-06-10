@@ -11,6 +11,10 @@ import io.kamara.xkcd.daily.utils.Constants
 import javax.inject.Singleton
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import io.kamara.xkcd.daily.repository.api.ComicsService
+import io.kamara.xkcd.daily.repository.api.LiveDataCallAdapterFactory
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module(includes = [ViewModelModule::class])
 class AppModule {
@@ -38,5 +42,16 @@ class AppModule {
         val gsonBuilder = GsonBuilder()
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         return gsonBuilder.create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideComicsService(): ComicsService {
+        return Retrofit.Builder()
+            .baseUrl("https://xkcd.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(ComicsService::class.java)
     }
 }

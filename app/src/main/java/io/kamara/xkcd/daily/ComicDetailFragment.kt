@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.di.Injectable
+import io.kamara.xkcd.daily.repository.api.Resource
 import io.kamara.xkcd.daily.utils.Constants
 import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModel
 import kotlinx.android.synthetic.main.fragment_comic_detail.*
@@ -46,10 +47,11 @@ class ComicDetailFragment : BaseFragment(), Injectable {
             .get(ComicDetailViewModel::class.java)
 
         comicId?.let { comicDetailViewModel?.setComicId(it) }
-        comicDetailViewModel?.comic?.observe(viewLifecycleOwner, Observer { comic -> updateViews(comic) })
+        comicDetailViewModel?.comic?.observe(viewLifecycleOwner, Observer { result -> updateViews(result) })
     }
 
-    private fun updateViews(comic: Comic?) {
+    private fun updateViews(result: Resource<Comic>) {
+        val comic = result.data
         comic?.img?.let { loadImage(it, comicImage) }
     }
 

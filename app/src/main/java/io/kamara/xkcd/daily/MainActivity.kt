@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(),
         val tag = itemId.toString()
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (itemId) {
             R.id.nav_home -> {
-                ComicDetailFragment.newInstance("1")
+                ComicDetailFragment.newInstance("100")
             }
             R.id.nav_favorites -> {
                 FavoritesFragment.newInstance()

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.repository.ComicRepository
 import io.kamara.xkcd.daily.ComicDetailFragment
+import io.kamara.xkcd.daily.repository.api.Resource
 import io.kamara.xkcd.daily.utils.AbsentLiveData
 import javax.inject.Inject
 
@@ -17,10 +18,10 @@ import javax.inject.Inject
 class ComicDetailViewModel @Inject constructor(comicRepository: ComicRepository): ViewModel(){
     private val comicId = MutableLiveData<String>()
 
-    val comic: LiveData<Comic>  = Transformations.switchMap(comicId) { comicId ->
+    val comic: LiveData<Resource<Comic>>? = Transformations.switchMap(comicId) { comicId ->
         when (comicId) {
             null -> AbsentLiveData.create()
-            else -> comicRepository.getComic(comicId)
+            else -> comicRepository.loadComic(comicId)
         }
     }
 
