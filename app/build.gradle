@@ -6,6 +6,12 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'kotlin-allopen'
+
+allOpen {
+    annotation('io.kamara.xkcd.daily.testing.Mockable')
+}
+
 android {
     compileSdkVersion androidCompileSdkVersion
     defaultConfig {
@@ -53,7 +59,14 @@ dependencies {
     kapt libraries.daggerAndroidCompiler
 
     testImplementation testLibraries.junit4
+    testImplementation testLibraries.mockitoCore
+
     androidTestImplementation testLibraries.testRunner
     androidTestImplementation testLibraries.espressoCore
     androidTestImplementation testLibraries.archCoreTesting
+    androidTestImplementation testLibraries.mockitoCore
+    androidTestImplementation testLibraries.mockitoAndroid
+
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+
 }

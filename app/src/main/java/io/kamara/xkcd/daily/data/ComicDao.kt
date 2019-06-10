@@ -11,8 +11,8 @@ interface ComicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertComic(comic: Comic)
 
-    @Delete
-    fun deleteComic(comic: Comic)
+    @Query("DELETE FROM comics WHERE comic_id = :comicId")
+    fun deleteComicById(comicId: String)
 
     @Query("SELECT * FROM comics")
     fun getAllComic(): LiveData<List<Comic>>

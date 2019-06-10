@@ -20,10 +20,15 @@ ext {
     archCoreTestingVersion = '2.0.0'
     glideVersion = '4.9.0'
     daggerVerion = '2.23.1'
+    mockitoVersion = "2.7.19"
+    mockitoAllVersion = "1.10.19"
+    mockitoAndroidVersion = "2.25.0"
+
 
     buildPlugins = [
             androidGradlePlugin: "com.android.tools.build:gradle:$androidBuildToolsVersion",
-            kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+            kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+            kotlinOpenAllPlugin: "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
     ]
 
 
@@ -55,6 +60,9 @@ ext {
             junit4              : "junit:junit:$junit4Version",
             testRunner          : "androidx.test:runner:$testRunnerVersion",
             espressoCore        : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
-            archCoreTesting     : "androidx.arch.core:core-testing:$archCoreTestingVersion"
+            archCoreTesting     : "androidx.arch.core:core-testing:$archCoreTestingVersion",
+            mockitoCore         : "org.mockito:mockito-core:$mockitoVersion",
+            mockitoAll          : "org.mockito:mockito-all:$mockitoAllVersion",
+            mockitoAndroid      : "org.mockito:mockito-android:$mockitoAndroidVersion"
     ]
 }

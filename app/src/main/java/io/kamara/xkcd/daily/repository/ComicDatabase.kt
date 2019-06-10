@@ -9,7 +9,7 @@ import io.kamara.xkcd.daily.data.ComicDao
 /**
  * The Room database for this application
  */
-@Database(entities = [Comic::class], version = 2, exportSchema = false)
+@Database(entities = [Comic::class], version = 3, exportSchema = false)
 abstract class ComicDatabase : RoomDatabase() {
     abstract fun comicDao(): ComicDao
 }

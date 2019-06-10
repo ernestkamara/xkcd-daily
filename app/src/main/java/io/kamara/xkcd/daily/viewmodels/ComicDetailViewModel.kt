@@ -24,7 +24,7 @@ class ComicDetailViewModel @Inject constructor(comicRepository: ComicRepository)
         }
     }
 
-    fun setComicId(comicId: String) {
+    fun setComicId(comicId: String?) {
         this.comicId.value = comicId
     }
 }
