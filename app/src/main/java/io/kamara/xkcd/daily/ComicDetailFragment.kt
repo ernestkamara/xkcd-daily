@@ -1,10 +1,14 @@
 package io.kamara.xkcd.daily
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -26,7 +30,7 @@ import kotlin.random.Random
  * A fragment representing a single [Comic] detail screen
  *
  */
-class ComicDetailFragment : BaseFragment(), Injectable {
+class ComicDetailFragment : BaseFragment(), Injectable, SearchView.OnQueryTextListener {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private var comicDetailViewModel: ComicDetailViewModel? = null
     private var comicId: String? = null
@@ -74,6 +78,8 @@ class ComicDetailFragment : BaseFragment(), Injectable {
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_browse, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        setupSearch(searchItem)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -135,6 +141,34 @@ class ComicDetailFragment : BaseFragment(), Injectable {
 
     private fun updateComicId(comicId: Int) {
         comicDetailViewModel?.setComicId(comicId.toString())
+    }
+
+    private fun setupSearch(searchItem: MenuItem) {
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        searchView.queryHint = getString(R.string.search_view_hint)
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        //TODO: Support title and field search
+        val isValidComicId = query.matches("[1-9][0-9]*".toRegex())
+        if (isValidComicId) {
+            comicDetailViewModel?.setComicId(query)
+        } else{
+            Toast.makeText(context, R.string.invalid_search_query_warning, Toast.LENGTH_SHORT).show()
+        }
+        // TODO: Move to extension functions
+        view?.hideKeyboard()
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     companion object {

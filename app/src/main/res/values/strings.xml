@@ -27,4 +27,6 @@
     <string name="information">Information</string>
 
     <string name="title_activity_fullscreen_preview">Comic Fullscreen Preview</string>
+    <string name="search_view_hint">Search Comic by Number</string>
+    <string name="invalid_search_query_warning">Please check input query, positive numbers only</string>
 </resources>
