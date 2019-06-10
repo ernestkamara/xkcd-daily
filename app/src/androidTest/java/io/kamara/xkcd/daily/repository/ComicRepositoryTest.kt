@@ -2,6 +2,8 @@ package io.kamara.xkcd.daily.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.kamara.xkcd.daily.data.ComicDao
+import io.kamara.xkcd.daily.repository.api.AppExecutors
+import io.kamara.xkcd.daily.repository.api.ComicsService
 import io.kamara.xkcd.daily.utils.loadResource
 import io.kamara.xkcd.daily.utils.loadTestComic
 import org.junit.Rule
@@ -14,7 +16,10 @@ import org.mockito.Mockito.verify
 @RunWith(JUnit4::class)
 class ComicRepositoryTest {
     private val comicDao = mock(ComicDao::class.java)
-    private val comicRepository = ComicRepository(comicDao)
+    private lateinit var appExecutors: AppExecutors
+    private lateinit var comicsService: ComicsService
+
+    private val comicRepository = ComicRepository(comicDao, appExecutors, comicsService)
 
     @Rule
     @JvmField

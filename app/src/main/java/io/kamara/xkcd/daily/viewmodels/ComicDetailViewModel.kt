@@ -18,19 +18,14 @@ import javax.inject.Inject
 class ComicDetailViewModel @Inject constructor(private val comicRepository: ComicRepository): ViewModel(){
     private val comicId = MutableLiveData<String>()
 
-    val comic: LiveData<Resource<Comic>>? = Transformations.switchMap(comicId) { comicId ->
+    val comic: LiveData<Resource<Comic>> = Transformations.switchMap(comicId) { comicId ->
         when (comicId) {
             null -> AbsentLiveData.create()
             else -> comicRepository.loadComic(comicId)
         }
     }
 
-    val favoriteComics: LiveData<List<Comic>> = Transformations.switchMap(comicId) { comicId ->
-        when (comicId) {
-            null -> AbsentLiveData.create()
-            else -> comicRepository.getFavouriteComics()
-        }
-    }
+    val favoriteComics: LiveData<List<Comic>> = comicRepository.getFavouriteComics()
 
     fun setComicId(comicId: String?) {
         this.comicId.value = comicId

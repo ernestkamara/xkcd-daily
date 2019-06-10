@@ -21,7 +21,7 @@
     <string name="menu_about_app">About this app</string>
 
     <string name="toolbar_title_browse_comics">Browse Comics</string>
-    <string name="toolbar_title_favorites">Favorites</string>
+    <string name="toolbar_title_favorites">Favorite Comics</string>
     <string name="action_search">Search</string>
     <string name="action_details">Details</string>
     <string name="information">Information</string>

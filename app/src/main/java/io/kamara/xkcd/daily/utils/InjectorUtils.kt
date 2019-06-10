@@ -17,7 +17,6 @@ object InjectorUtils {
                     JsonReader(inputStream.reader()).use { jsonReader ->
                         val comicType = object : TypeToken<List<Comic>>() {}.type
                         val comicList: List<Comic> = Gson().fromJson(jsonReader, comicType)
-                        comicList.onEach { it.isFavorite = Constants.FAVORITE_ADDED }
                         comicDao.insertAll(comicList)
                     }
                 }

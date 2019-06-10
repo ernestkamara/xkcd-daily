@@ -2,6 +2,7 @@ package io.kamara.xkcd.daily
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.kamara.xkcd.daily.adapters.FavoritesAdapter
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.di.Injectable
+import io.kamara.xkcd.daily.utils.toast
 import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModel
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import javax.inject.Inject
@@ -19,7 +21,7 @@ class FavoritesFragment : BaseFragment(), Injectable {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var comicDetailViewModel: ComicDetailViewModel? = null
 
-    private val adapter = FavoritesAdapter()
+    private val adapter = FavoritesAdapter(::onItemClick)
 
     override fun toolbarTitle(): Int {
         return R.string.toolbar_title_favorites
@@ -48,22 +50,15 @@ class FavoritesFragment : BaseFragment(), Injectable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_favorites, container, false)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_favorites, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_explanation -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun updateViews(result: List<Comic>) {
         adapter.submitList(result)
+    }
+
+    private fun onItemClick(comicId: String) {
+        context.toast("Favorite item with nun $comicId clicked", Toast.LENGTH_SHORT)
+        //TODO: Open detail page
     }
 }

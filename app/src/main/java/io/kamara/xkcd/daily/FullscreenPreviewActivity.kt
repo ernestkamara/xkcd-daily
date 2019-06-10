@@ -1,14 +1,12 @@
 package io.kamara.xkcd.daily
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import androidx.appcompat.app.AppCompatActivity
 import io.kamara.xkcd.daily.utils.Constants.Companion.ARG_COMIC_IMAGE_URL
 import io.kamara.xkcd.daily.utils.Constants.Companion.UI_ANIMATION_DELAY
+import io.kamara.xkcd.daily.utils.loadFromUrl
 import kotlinx.android.synthetic.main.activity_fullscreen_preview.*
 
 /**
@@ -49,13 +47,7 @@ class FullscreenPreviewActivity : AppCompatActivity() {
         comicImage.setOnClickListener { toggle() }
 
         val imageUrl = intent.getStringExtra(ARG_COMIC_IMAGE_URL)
-        imageUrl?.let {
-            Glide.with(this)
-                .load(it)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transition(DrawableTransitionOptions.withCrossFade(1000))
-                .into(comicImage)
-        }
+        imageUrl?.let { comicImage.loadFromUrl(it) }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

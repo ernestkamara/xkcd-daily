@@ -15,6 +15,7 @@
             android:layout_margin="8dp"
             android:layout_gravity="center_vertical"
             app:fabSize="mini"
+            android:contentDescription="Browse previous Comic"
             app:srcCompat="@android:drawable/ic_media_previous"
             android:id="@+id/previousComicFab"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,6 +24,7 @@
             android:layout_margin="8dp"
             android:layout_gravity="center_vertical"
             app:fabSize="normal"
+            android:contentDescription="Browse random Comic"
             app:srcCompat="@drawable/ic_random_24dp"
             android:id="@+id/randomComicFab"/>
 
@@ -31,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:fabSize="mini"
+            android:contentDescription="Browse next Comic"
             android:layout_gravity="center_vertical"
             app:srcCompat="@android:drawable/ic_media_next"
             android:id="@+id/nextComicFab"/>

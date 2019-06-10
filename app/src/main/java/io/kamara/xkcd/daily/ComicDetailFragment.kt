@@ -1,23 +1,19 @@
 package io.kamara.xkcd.daily
 
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.di.Injectable
 import io.kamara.xkcd.daily.repository.api.Resource
-import io.kamara.xkcd.daily.utils.Constants
+import io.kamara.xkcd.daily.utils.*
 import io.kamara.xkcd.daily.utils.Constants.Companion.ARG_COMIC_IMAGE_URL
 import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModel
 import kotlinx.android.synthetic.main.actions_browse_comic.*
@@ -110,13 +106,7 @@ class ComicDetailFragment : BaseFragment(), Injectable, SearchView.OnQueryTextLi
                  it.startActivity(intent)
              }
          }
-         //TODO: Moved to extension functions
-         Glide.with(this)
-             .load(imageUrl)
-             .placeholder(R.drawable.load_image_placeholder)
-             .transition(DrawableTransitionOptions.withCrossFade(Constants.IMAGE_LOADING_CROSS_FADE_DURATION))
-             .fitCenter()
-             .into(view)
+         view.loadFromUrl(imageUrl)
     }
 
     private fun toggleFavorite() {
@@ -128,12 +118,15 @@ class ComicDetailFragment : BaseFragment(), Injectable, SearchView.OnQueryTextLi
 
     private fun setupActions() {
         nextComicFab.setOnClickListener {
+            context.toast(it.contentDescription.toString(), Toast.LENGTH_SHORT)
             comicId?.let { currentNum -> updateComicId(currentNum.toInt().inc()) }
         }
         previousComicFab.setOnClickListener {
+            context.toast(it.contentDescription.toString(), Toast.LENGTH_SHORT)
             comicId?.let { currentNum -> updateComicId(currentNum.toInt().dec()) }
         }
         randomComicFab.setOnClickListener {
+            context.toast(it.contentDescription.toString(), Toast.LENGTH_SHORT)
             //TODO: Fix with actual offsets
             updateComicId((Random.nextInt(1, 2158)))
         }
@@ -151,24 +144,17 @@ class ComicDetailFragment : BaseFragment(), Injectable, SearchView.OnQueryTextLi
 
     override fun onQueryTextSubmit(query: String): Boolean {
         //TODO: Support title and field search
-        val isValidComicId = query.matches("[1-9][0-9]*".toRegex())
-        if (isValidComicId) {
+        if (query.isNumeric()) {
             comicDetailViewModel?.setComicId(query)
         } else{
-            Toast.makeText(context, R.string.invalid_search_query_warning, Toast.LENGTH_SHORT).show()
+            context.toast(R.string.invalid_search_query_warning, Toast.LENGTH_SHORT)
         }
-        // TODO: Move to extension functions
         view?.hideKeyboard()
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
-    }
-
-    private fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     companion object {
