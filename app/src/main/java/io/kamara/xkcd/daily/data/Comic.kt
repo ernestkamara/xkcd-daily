@@ -18,4 +18,5 @@ data class Comic(
     @ColumnInfo(name = "comic_published_year") val year: String?,
     @ColumnInfo(name = "comic_link_url") val link: String?,
     @ColumnInfo(name = "comic_alt") val alt: String?,
-    @ColumnInfo(name = "comic_safe_title") val safeTitle: String?)
+    @ColumnInfo(name = "comic_safe_title") val safeTitle: String?,
+    @ColumnInfo(name = "comic_favorite_flag") var isFavorite: String? = "0")

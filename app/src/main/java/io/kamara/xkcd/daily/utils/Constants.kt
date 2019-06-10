@@ -11,7 +11,7 @@ class Constants{
         const val ARG_COMIC_ID = "comic_id"
         const val MOCK_COMICS_DATA_FILENAME = "comics.json"
         const val IMAGE_LOADING_CROSS_FADE_DURATION = 1000
-        const val PARAM_NAVIGATION_ID = "navigation_id"
-
+        const val FAVORITE_ADDED = "0"
+        const val FAVORITE_REMOVED = "1"
     }
 }

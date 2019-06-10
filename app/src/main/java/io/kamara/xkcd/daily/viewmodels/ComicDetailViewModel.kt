@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * The ViewModel for the [ComicDetailFragment].
  */
-class ComicDetailViewModel @Inject constructor(comicRepository: ComicRepository): ViewModel(){
+class ComicDetailViewModel @Inject constructor(private val comicRepository: ComicRepository): ViewModel(){
     private val comicId = MutableLiveData<String>()
 
     val comic: LiveData<Resource<Comic>>? = Transformations.switchMap(comicId) { comicId ->
@@ -27,5 +27,16 @@ class ComicDetailViewModel @Inject constructor(comicRepository: ComicRepository)
 
     fun setComicId(comicId: String?) {
         this.comicId.value = comicId
+    }
+
+    fun isFavoriteComic(comicId: String) = comicRepository.isFavoriteComic(comicId)
+
+    fun toggleFavorite(comicId: String){
+        val favorite = isFavoriteComic(comicId)
+        if (favorite) {
+            comicRepository.deleteFavorite(comicId)
+        } else{
+            comicRepository.createFavorite(comicId)
+        }
     }
 }

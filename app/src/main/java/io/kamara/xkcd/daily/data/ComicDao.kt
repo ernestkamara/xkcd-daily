@@ -26,4 +26,13 @@ interface ComicDao {
 
     @Query("DELETE FROM comics")
     fun deleteAll()
+
+    @Query("SELECT * FROM comics WHERE comic_id = :comicId")
+    fun findComicItemById(comicId: String): Comic?
+
+    @Query("UPDATE comics SET comic_favorite_flag=:flag WHERE comic_id = :comicId")
+    fun updateComicFavoriteFlag(comicId: String, flag: String)
+
+    @Query("SELECT * FROM comics where comic_favorite_flag = 1 ")
+    fun getFavouriteComics(): LiveData<List<Comic>>
 }

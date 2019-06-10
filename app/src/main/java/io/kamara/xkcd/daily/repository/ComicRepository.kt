@@ -8,6 +8,8 @@ import io.kamara.xkcd.daily.repository.api.ComicsService
 import io.kamara.xkcd.daily.repository.api.NetworkBoundResource
 import io.kamara.xkcd.daily.repository.api.Resource
 import io.kamara.xkcd.daily.testing.Mockable
+import io.kamara.xkcd.daily.utils.Constants.Companion.FAVORITE_ADDED
+import io.kamara.xkcd.daily.utils.Constants.Companion.FAVORITE_REMOVED
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -43,4 +45,14 @@ class ComicRepository
 
         }.asLiveData()
     }
+
+    fun isFavoriteComic(comicId: String): Boolean {
+        return comicDao.findComicItemById(comicId)?.isFavorite.equals(FAVORITE_ADDED)
+    }
+
+    fun getFavouriteComics() = comicDao.getFavouriteComics()
+
+    fun createFavorite(comicId: String) = comicDao.updateComicFavoriteFlag(comicId, FAVORITE_ADDED)
+
+    fun deleteFavorite(comicId: String) = comicDao.updateComicFavoriteFlag(comicId, FAVORITE_REMOVED)
 }
