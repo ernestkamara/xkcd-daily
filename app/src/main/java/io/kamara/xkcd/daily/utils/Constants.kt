@@ -13,5 +13,7 @@ class Constants{
         const val IMAGE_LOADING_CROSS_FADE_DURATION = 1000
         const val FAVORITE_ADDED = "0"
         const val FAVORITE_REMOVED = "1"
+        const val UI_ANIMATION_DELAY = 300
+        const val ARG_COMIC_IMAGE_URL = "image_url"
     }
 }

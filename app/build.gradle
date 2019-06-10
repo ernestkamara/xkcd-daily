@@ -58,6 +58,8 @@ dependencies {
     implementation libraries.daggerAndroidSupport
     kapt libraries.daggerAndroidCompiler
 
+    implementation libraries.photoView
+
     testImplementation testLibraries.junit4
     testImplementation testLibraries.mockitoCore
 

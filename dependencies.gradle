@@ -23,6 +23,7 @@ ext {
     mockitoVersion = "2.7.19"
     mockitoAllVersion = "1.10.19"
     mockitoAndroidVersion = "2.25.0"
+    photoViewVersion = '2.0.0'
 
 
     buildPlugins = [
@@ -51,7 +52,9 @@ ext {
             daggerCompiler       : "com.google.dagger:dagger-compiler:$daggerVerion",
             daggerAndroid        : "com.google.dagger:dagger-android:$daggerVerion",
             daggerAndroidSupport : "com.google.dagger:dagger-android-support:$daggerVerion",
-            daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:$daggerVerion"
+            daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:$daggerVerion",
+            photoView            : "com.github.chrisbanes:PhotoView:$photoViewVersion"
+
 
     ]
 

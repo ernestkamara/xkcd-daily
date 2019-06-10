@@ -1,6 +1,7 @@
 package io.kamara.xkcd.daily
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import io.kamara.xkcd.daily.data.Comic
 import io.kamara.xkcd.daily.di.Injectable
 import io.kamara.xkcd.daily.repository.api.Resource
 import io.kamara.xkcd.daily.utils.Constants
+import io.kamara.xkcd.daily.utils.Constants.Companion.ARG_COMIC_IMAGE_URL
 import io.kamara.xkcd.daily.viewmodels.ComicDetailViewModel
 import kotlinx.android.synthetic.main.actions_browse_comic.*
 import kotlinx.android.synthetic.main.fragment_comic_detail.*
@@ -95,6 +97,14 @@ class ComicDetailFragment : BaseFragment(), Injectable {
         }
     }
      private fun loadImage(imageUrl: String, view: ImageView) {
+         view.setOnClickListener {
+             activity?.let{
+                 val intent = Intent (it, FullscreenPreviewActivity::class.java)
+                 intent.putExtra(ARG_COMIC_IMAGE_URL, imageUrl)
+                 it.startActivity(intent)
+             }
+         }
+         //TODO: Moved to extension functions
          Glide.with(this)
              .load(imageUrl)
              .placeholder(R.drawable.load_image_placeholder)
@@ -118,6 +128,7 @@ class ComicDetailFragment : BaseFragment(), Injectable {
             comicId?.let { currentNum -> updateComicId(currentNum.toInt().dec()) }
         }
         randomComicFab.setOnClickListener {
+            //TODO: Fix with actual offsets
             updateComicId((Random.nextInt(1, 2158)))
         }
     }

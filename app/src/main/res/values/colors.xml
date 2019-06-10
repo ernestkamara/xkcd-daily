@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="browse_comics_actions_bg">#33000000</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="activity_fullscreen_preview_bg">#ffffff</color>
 </resources>
