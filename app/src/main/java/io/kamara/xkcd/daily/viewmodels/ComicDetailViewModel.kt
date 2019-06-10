@@ -25,6 +25,13 @@ class ComicDetailViewModel @Inject constructor(private val comicRepository: Comi
         }
     }
 
+    val favoriteComics: LiveData<List<Comic>> = Transformations.switchMap(comicId) { comicId ->
+        when (comicId) {
+            null -> AbsentLiveData.create()
+            else -> comicRepository.getFavouriteComics()
+        }
+    }
+
     fun setComicId(comicId: String?) {
         this.comicId.value = comicId
     }

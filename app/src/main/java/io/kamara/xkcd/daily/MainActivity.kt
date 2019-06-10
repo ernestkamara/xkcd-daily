@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(),
         if (fragment != null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment, tag)
+                .replace(R.id.fragmentContainer, fragment as Fragment, tag)
                 .commit()
 
             val toolbarTitleRes = (fragment as BaseFragment).toolbarTitle()
