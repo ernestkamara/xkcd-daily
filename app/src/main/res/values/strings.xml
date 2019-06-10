@@ -3,11 +3,26 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
+
     <string name="action_explanation">Explanation</string>
     <string name="action_info">Info</string>
     <string name="action_share">Share</string>
     <string name="action_favorites">Favorites</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">xkcd Daily</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">@string/nav_header_title</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_about_app">About this app</string>
+
+    <string name="toolbar_title_browse_comics">Browse Comics</string>
+    <string name="toolbar_title_favorites">Favorites</string>
+    <string name="action_search">Search</string>
+    <string name="action_details">Details</string>
+    <string name="information">Information</string>
 </resources>

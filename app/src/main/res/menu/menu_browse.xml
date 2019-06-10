@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="io.kamara.xkcd.daily.MainActivity">
+
+    <item android:id="@+id/action_search"
+          android:title="@string/action_search"
+          android:orderInCategory="1"
+          android:icon="@android:drawable/ic_menu_search"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_favorites"
+          android:title="@string/action_favorites"
+          android:orderInCategory="1"
+          android:icon="@drawable/ic_favorite_border_black_24dp"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_share"
+          android:title="@string/action_share"
+          android:icon="@drawable/ic_share_black_24dp"
+          android:orderInCategory="2"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_details"
+          android:title="@string/action_details"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+    <item android:id="@+id/action_explanation"
+          android:title="@string/action_explanation"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+</menu>

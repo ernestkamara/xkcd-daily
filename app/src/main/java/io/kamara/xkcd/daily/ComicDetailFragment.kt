@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -23,11 +22,15 @@ import javax.inject.Inject
  * A fragment representing a single [Comic] detail screen
  *
  */
-class ComicDetailFragment : Fragment(), Injectable {
+class ComicDetailFragment : BaseFragment(), Injectable {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private var comicDetailViewModel: ComicDetailViewModel? = null
-    private var comicId: String? = "14" //TODO: Default to null
+    private var comicId: String? = null
 
+
+    override fun toolbarTitle(): Int {
+        return R.string.toolbar_title_browse_comics
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,6 @@ class ComicDetailFragment : Fragment(), Injectable {
     }
 
     private fun updateViews(comic: Comic?) {
-        comicText.text = comic?.toString()
         comic?.img?.let { loadImage(it, comicImage) }
     }
 
@@ -58,7 +60,7 @@ class ComicDetailFragment : Fragment(), Injectable {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.comic_detail_menu, menu)
+        menuInflater.inflate(R.menu.menu_browse, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
