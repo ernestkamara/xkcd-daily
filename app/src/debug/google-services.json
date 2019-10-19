@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "282611147820",
+    "firebase_url": "https://xkcd-417a4.firebaseio.com",
+    "project_id": "xkcd-417a4",
+    "storage_bucket": "xkcd-417a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282611147820:android:3751107bbbded84e191d89",
+        "android_client_info": {
+          "package_name": "io.kamara.xkcd.daily.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282611147820-aijccq37f8acrr45rss4fvnsgl8urrse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJLDBbGgL2RqMGEcijXRzAF8C9cDW2Nx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282611147820-aijccq37f8acrr45rss4fvnsgl8urrse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

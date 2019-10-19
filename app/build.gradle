@@ -8,11 +8,28 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-allopen'
 
-allOpen {
-    annotation('io.kamara.xkcd.daily.testing.Mockable')
-}
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias keystoreProperties['debugKeyAlias']
+            keyPassword keystoreProperties['debugKeyPassword']
+            storeFile file(rootDir.getCanonicalPath() + '/' + keystoreProperties['debugKeyStore'])
+            storePassword keystoreProperties['debugStorePassword']
+        }
+
+
+        release {
+            keyAlias keystoreProperties['releaseKeyAlias']
+            keyPassword keystoreProperties['releaseKeyPassword']
+            storeFile file(rootDir.getCanonicalPath() + '/' + keystoreProperties['releaseKeyStore'])
+            storePassword keystoreProperties['releaseStorePassword']
+        }
+    }
+
     compileSdkVersion androidCompileSdkVersion
     defaultConfig {
         applicationId "io.kamara.xkcd.daily"
@@ -22,10 +39,27 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            debuggable true
+        }
+
+        qa {
+            applicationIdSuffix ".qa"
+            versionNameSuffix "-qa"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     // Gradle automatically adds 'android.test.runner' as a dependency.
@@ -59,6 +93,7 @@ dependencies {
     kapt libraries.daggerAndroidCompiler
 
     implementation libraries.photoView
+    implementation libraries.firebaseAnalytics
 
     testImplementation testLibraries.junit4
     testImplementation testLibraries.mockitoCore
@@ -72,3 +107,5 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:2.13.0'
 
 }
+
+apply plugin: 'com.google.gms.google-services'
